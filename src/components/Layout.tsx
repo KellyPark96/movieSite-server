@@ -1,6 +1,11 @@
+import React from "react";
 import NavVar from "./NavBar";
 
-export default function Layout({ children }) {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <NavVar />
