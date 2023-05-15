@@ -1,26 +1,34 @@
 /**
  * server side rendering
- * async await await fetch
- * why image dash was deleted?
  */
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Seo from "../components/Seo";
 
 export default function Home({ results }) {
-  // const router = useRouter();
-  // const handleClick = (id, title) => router.push(`/movies/${title}/${id}`);
+  const router = useRouter();
+  const handleClick = (id, title) => {
+    router.push(`/movies/${title}/${id}`);
+  };
 
   return (
     <div className="container">
       <Seo title="home" />
-      <div className="active">Home</div>
-      {/* {!movies && <h4>Loading...</h4>} */}
       {results?.map((movie) => (
-        <div className="movie" key={movie.id}>
+        <div
+          className="movie"
+          key={movie.id}
+          onClick={() => handleClick(movie.id, movie.original_title)}
+        >
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt="image"
           />
-          <h4>{movie.original_title}</h4>
+          <h4>
+            <Link href={`/movies/${movie.original_title}/${movie.id}`}>
+              {movie.original_title}
+            </Link>
+          </h4>
         </div>
       ))}
       <style jsx>{`
@@ -64,6 +72,6 @@ export async function getServerSideProps() {
   ).json();
 
   return {
-    props: { results },
+    props: JSON.parse(JSON.stringify(results)),
   };
 }
