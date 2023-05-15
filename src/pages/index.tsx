@@ -37,6 +37,7 @@ export default function Home({ results }) {
           grid-template-columns: 1fr 1fr;
           padding: 20px;
           gap: 20px;
+          margin-top: 100px;
         }
         .movie {
           cursor: pointer;
