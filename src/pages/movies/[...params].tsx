@@ -2,10 +2,10 @@ import { GetServerSideProps } from "next";
 import Seo from "../../components/Seo";
 import { useRouter } from "next/router";
 
-export default function Detail({ params, data }) {
-  console.log(params, data);
+export default function Detail({ params }) {
   const router = useRouter();
   const [title, id] = params || [];
+  console.log(title);
   return (
     <div>
       <Seo title={title} />

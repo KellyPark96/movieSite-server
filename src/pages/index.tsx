@@ -72,6 +72,6 @@ export async function getServerSideProps() {
   ).json();
 
   return {
-    props: JSON.parse(JSON.stringify(results)),
+    props: { results },
   };
 }
