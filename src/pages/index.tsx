@@ -1,24 +1,42 @@
 /**
  * server side rendering
  */
+import Seo from "../components/Seo";
+import { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Seo from "../components/Seo";
 
-export default function Home({ results }) {
+interface IMovieProps {
+  id: number;
+  backdrop_path: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+  genre_ids: [number];
+}
+
+/**
+ * GetServerSideProps 타입을 import 해오며
+   그 다음 우리가 사용할 데이터의 type을 사용하려면 InferGetServerSidePropsType
+ */
+export default function Home({
+  results,
+}: InferGetServerSidePropsType<GetServerSideProps>) {
   const router = useRouter();
-  const handleClick = (id, title) => {
+  const handleClick = (id: number, title: string) => {
     router.push(`/movies/${title}/${id}`);
   };
 
   return (
     <div className="container">
       <Seo title="home" />
-      {results?.map((movie) => (
+      {results?.map((movie: IMovieProps) => (
         <div
+          onClick={() => handleClick(movie.id, movie.original_title)}
           className="movie"
           key={movie.id}
-          onClick={() => handleClick(movie.id, movie.original_title)}
         >
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -65,7 +83,8 @@ export default function Home({ results }) {
 // loading 화면을 보여준 다음에 데이터를 받는게 좋은지
 
 /**
- *You can use caching headers (Cache-Control) inside getServerSideProps to cache dynamic responses.
+ *You can use caching headers (Cache-Control) inside getServerSideProps 
+  to cache dynamic responses.
  */
 export async function getServerSideProps() {
   const { results } = await (

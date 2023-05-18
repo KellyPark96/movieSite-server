@@ -1,5 +1,10 @@
 import Head from "next/head";
-export default function Seo({ title }) {
+
+interface TitleProps {
+  title: string;
+}
+
+export default function Seo({ title }: TitleProps) {
   return (
     <Head>
       <title>{title} | Movies</title>

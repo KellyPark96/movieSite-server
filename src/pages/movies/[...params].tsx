@@ -1,12 +1,36 @@
-import { GetServerSideProps } from "next";
 import Seo from "../../components/Seo";
-import { useRouter } from "next/router";
 
-export default function Detail({ params, data }) {
-  const router = useRouter();
-  const [title, id] = params || [];
-  console.log(title);
-  console.log(data);
+interface IMovieProps {
+  adult: boolean;
+  backdrop_path: string;
+  genres: [{ id: number; name: string }];
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  production_companies: [
+    {
+      id: number;
+      logo_path: string;
+      name: string;
+      original_country: string;
+    }
+  ];
+  release_date: string;
+  runtime: number;
+  title: string;
+  vote_average: number;
+}
+
+interface IGetServerSideProps {
+  params: string | string[];
+  data: IMovieProps;
+}
+
+export default function Detail({ params, data }: IGetServerSideProps) {
+  const title = params[0];
   return (
     <div className="container">
       <Seo title={title} />
@@ -14,7 +38,7 @@ export default function Detail({ params, data }) {
         <div className="textbox">
           <h1 className="title">{data.original_title}</h1>
           <ul>
-            <li>Rating : {data.original_language}</li>
+            <li>Overview : {data.overview}</li>
             <li>
               Genres :
               <ul>
@@ -70,7 +94,15 @@ export default function Detail({ params, data }) {
   );
 }
 
-export async function getServerSideProps({ params: { params } }) {
+interface IServerSideParamsProps {
+  params: {
+    params: string | string[];
+  };
+}
+
+export async function getServerSideProps({
+  params: { params },
+}: IServerSideParamsProps) {
   const id = params[1];
   const data = await (
     await fetch(`http://localhost:3000/api/movies/${id}`)
