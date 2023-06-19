@@ -1,14 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaTwitterSquare, FaInstagramSquare } from "react-icons/fa";
 
 export default function NavVar() {
   const router = useRouter();
-  let last_known_scroll_position = 0;
-  let ticking = false;
-  const [changing, setChanging] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
+  // let last_known_scroll_position = 0;
+  // let ticking = false;
+  // const [changing, setChanging] = useState(false);
+  // const [scrolling, setScrolling] = useState(false);
 
   // const doSomething = (scroll_pos) => {
   //   if (scroll_pos >= 10) {

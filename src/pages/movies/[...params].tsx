@@ -72,22 +72,10 @@ export default function Detail({ params, data }: IGetServerSideProps) {
         .posterImage {
           height: 345px;
         }
-
-        .textbox {
-          padding: 0 16px 0 0;
-          width: 300px;
-          height: 345px;
-        }
         .title {
           font-weight: bold;
           font-size: 28px;
           color: #972d2d;
-        }
-        .textbox ul {
-          font-size: 18px;
-          color: #972d2d;
-          padding: 0 0 0 20px;
-          line-height: 1.5;
         }
       `}</style>
     </div>
@@ -100,14 +88,14 @@ interface IServerSideParamsProps {
   };
 }
 
-export async function getServerSideProps({
-  params: { params },
-}: IServerSideParamsProps) {
-  const id = params[1];
-  const data = await (
-    await fetch(`http://localhost:3000/api/movies/${id}`)
-  ).json();
-  return {
-    props: { params, data },
-  };
-}
+// export async function getServerSideProps({
+//   params: { params },
+// }: IServerSideParamsProps) {
+//   const id = params[1];
+//   const data = await (
+//     await fetch(`http://localhost:3000/api/movies/${id}`)
+//   ).json();
+//   return {
+//     props: { params, data },
+//   };
+// }

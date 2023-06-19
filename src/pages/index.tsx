@@ -33,6 +33,9 @@ export default function Home({
   return (
     <div className="container">
       <Seo title="home" />
+      <div>
+        <img src="/images/FanmaumTextLogo.svg" alt="logo"/>
+      </div>
       {results?.map((movie: IMovieProps) => (
         <div
           onClick={() => handleClick(movie.id, movie.original_title)}
