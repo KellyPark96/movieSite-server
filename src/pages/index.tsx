@@ -21,6 +21,7 @@ interface IMovieProps {
  * GetServerSideProps 타입을 import 해오며
    그 다음 우리가 사용할 데이터의 type을 사용하려면 InferGetServerSidePropsType
  */
+
 export default function Home({
   results,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
